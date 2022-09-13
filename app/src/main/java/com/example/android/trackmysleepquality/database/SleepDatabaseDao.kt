@@ -28,27 +28,27 @@ interface SleepDatabaseDao{
     // 1 entity 1 dao
     //1. insert new night into table
      @Insert
-    fun insert(night: SleepNight)
+     suspend fun insert(night: SleepNight)
 
     //2. Update Night in table
     @Update
-    fun update(night: SleepNight)
+    suspend fun update(night: SleepNight)
 
     //3. Get specific Night based on key
     @Query("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
-    fun get(key: Long): SleepNight?
+    suspend fun get(key: Long): SleepNight?
 
     //4. get all nights to display
     @Query("SELECT * from daily_sleep_quality_table ORDER BY nightId DESC")
-    fun getAllNights(): LiveData<List<SleepNight>>
+    suspend  fun getAllNights(): LiveData<List<SleepNight>>
 
     // 5. Get the most recent night
     @Query("SELECT * from daily_sleep_quality_table ORDER BY nightID DESC LIMIT 1")
-    fun getTonight(): SleepNight?
+    suspend  fun getTonight(): SleepNight?
 
     //6. Delete All Entries
     @Query("DELETE FROM daily_sleep_quality_table")
-    fun clear()
+    suspend  fun clear()
 }
 
 
